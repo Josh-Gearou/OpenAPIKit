@@ -978,6 +978,12 @@ extension JSONSchema.ObjectContext: Decodable {
         properties
             .filter { !required.contains($0.key) }
             .forEach { (propertyName, property) in
+                switch property {
+                case .reference(let ref):
+                    print("reference: \(ref)")
+                default:
+                    print("not a reference")
+                }
                 properties[propertyName] = property.optionalSchemaObject()
             }
 
